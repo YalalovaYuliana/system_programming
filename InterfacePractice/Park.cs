@@ -8,13 +8,55 @@ using System.Threading.Tasks;
 
 namespace InterfacePractice
 {
+    class LoadCapacityComparer : IComparer<Transport>
+    {
+        int GetLoadOpacity(Transport transport)
+        {
+            if (transport is Truck)
+            {
+                return (transport as Truck).LoadCapacity;
+            }
+            if (transport is PassengerCar)
+            {
+                return 200;
+            }
+            if (transport is Motorcycle)
+            {
+                return (transport as Motorcycle).IsHasSidecar ? 50 : 0;
+            }
+            return 0;
+        }
+        public int Compare(Transport x, Transport y)
+        {
+            return GetLoadOpacity(x).CompareTo(GetLoadOpacity(y));      
+        }
+    }
     class Park : IEnumerable
     {
         public Transport[] Transports { get; set; }
 
+        public Park(Transport[] transports)
+        {
+            Transports = transports;
+        }
+
+        public override string ToString()
+        {
+            return Transports.ToString();
+        }
+
         public IEnumerator GetEnumerator()
         {
             return Transports.GetEnumerator();
+        }
+
+        public void Sort()
+        {
+            Array.Sort(Transports);
+        }
+        public void Sort(IComparer<Transport> comparer)
+        {
+            Array.Sort(Transports, comparer);
         }
     }
     abstract class Transport : IComparable, ICloneable 
@@ -31,7 +73,19 @@ namespace InterfacePractice
         }
 
         public abstract object Clone();
-        public abstract int CompareTo(object obj);
+        public int CompareTo(object obj)
+        {
+            if (obj is Transport)
+            {
+                return Speed.CompareTo((obj as Transport).Speed);
+            }
+            throw new NotImplementedException();
+        }
+
+        public override string ToString()
+        {
+            return $"[{GetType().Name}] {Mark} ({Number}) {Speed} км/ч";
+        }
     }
 
     class PassengerCar : Transport 
@@ -43,11 +97,6 @@ namespace InterfacePractice
         public override object Clone()
         {
             return MemberwiseClone();
-        }
-
-        public override int CompareTo(object obj)
-        {
-            throw new NotImplementedException();
         }
     }
 
@@ -64,9 +113,9 @@ namespace InterfacePractice
             return MemberwiseClone();
         }
 
-        public override int CompareTo(object obj)
+        public override string ToString()
         {
-            throw new NotImplementedException();
+            return base.ToString() + $" {LoadCapacity} кг";
         }
     }
 
@@ -83,9 +132,10 @@ namespace InterfacePractice
             return MemberwiseClone();
         }
 
-        public override int CompareTo(object obj)
+        public override string ToString()
         {
-            throw new NotImplementedException();
+            string isHasSidecar = IsHasSidecar ? " с коляской" : " без коляски";
+            return base.ToString() + isHasSidecar;
         }
     }
 }

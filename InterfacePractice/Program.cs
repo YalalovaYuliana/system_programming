@@ -40,6 +40,53 @@ namespace InterfacePractice
                 Console.WriteLine(transport);
                 Console.WriteLine();
             }
+
+            Park park2 = (Park)park.Clone();
+
+            park2.Transports[0] = new PassengerCar("My car", "00000", 120);
+
+            Console.WriteLine(park.Transports[0]);
+
+            Console.WriteLine("\n\n\n\n\n\n\n\n\n\n\n");
+
+            IWorker[] workers =
+            {
+                new TeamLeader(),
+                new Worker()
+            };
+
+            Team team = new Team(workers);
+
+            IPart[] project =
+            {
+                new Basement(),
+                new Wall(),
+                new Wall(), 
+                new Wall(),
+                new Wall(),
+                new Door(),
+                new Window(),
+                new Window(),
+                new Window(),
+                new Window(),
+                new Roof()
+            };
+
+            House house = new House(project);
+
+            Console.WriteLine("_____________________СТРОЙКА______________________\n\n");
+
+            for (int i = 0; i <= project.Length; i++)
+            {
+                foreach (IWorker worker in team)
+                {
+                    worker.Work(house);
+                }
+            }
+
+            Console.WriteLine("\n_______________ДОМ ГОТОВ!_____________\n");
+
+            Console.WriteLine("░░░░░▄▄▄▄▄░░░░▄██▄░░░░░░░░░░░░░\r\n░░░░░▀████░▄███▀▀██▄▄░░░░░░░░░░\r\n░░░░░░███████▀░▄▄░▀███▄░░░░░░░░\r\n░░░░░░█████▀░▄████▄░▀███▄░░░░░░\r\n░░░░▄███▀░░▄███▀▀███▄░▀███▄▄░░░\r\n░░▄███▀░▄▄████░░░░████▄░░▀███▄░\r\n▄███▀░▄████████▄▄███████▄▄░▀██▄\r\n▀▀░░▄██████████████████████░░▀▀\r\n░░░░████▀▀▀▀▀▀▀███▀▀▀▀▀▀▀██░░░░\r\n░░░░████░██░██░███░██░██░██░░░░\r\n░░░░████░▄▄░▄▄░███░██░██░██░░░░\r\n░░░░████░▀▀░▀▀░███▄▄▄▄▄▄▄██░░░░\r\n░░░░████░██░██░████████████░░░░\r\n░░░▄████▄▄▄▄▄▄▄████████████▄░░░\r\n░░░█████████████████████████░░░\r\n░░░█████████████████████████░░░");
         }
     }
 }

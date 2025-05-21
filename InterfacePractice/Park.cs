@@ -31,7 +31,7 @@ namespace InterfacePractice
             return GetLoadOpacity(x).CompareTo(GetLoadOpacity(y));      
         }
     }
-    class Park : IEnumerable
+    class Park : IEnumerable, ICloneable
     {
         public Transport[] Transports { get; set; }
 
@@ -58,6 +58,18 @@ namespace InterfacePractice
         {
             Array.Sort(Transports, comparer);
         }
+
+        public object Clone()
+        {
+            Transport[] temp = new Transport[Transports.Length];
+
+            for (int i = 0; i < Transports.Length; i++)
+            {
+                temp[i] = (Transport)Transports[i].Clone();
+            }
+
+            return new Park(temp);
+        }
     }
     abstract class Transport : IComparable, ICloneable 
     {
@@ -72,7 +84,10 @@ namespace InterfacePractice
             Speed = speed;
         }
 
-        public abstract object Clone();
+        public object Clone()
+        {
+            return MemberwiseClone();
+        }
         public int CompareTo(object obj)
         {
             if (obj is Transport)
@@ -93,11 +108,6 @@ namespace InterfacePractice
         public PassengerCar(string mark, string number, int speed) : base(mark, number, speed)
         {
         }
-
-        public override object Clone()
-        {
-            return MemberwiseClone();
-        }
     }
 
     class Truck : Transport
@@ -106,11 +116,6 @@ namespace InterfacePractice
         public Truck(string mark, string number, int speed, int loadCapacity) : base(mark, number, speed)
         {
             LoadCapacity = loadCapacity;
-        }
-
-        public override object Clone()
-        {
-            return MemberwiseClone();
         }
 
         public override string ToString()
@@ -127,10 +132,6 @@ namespace InterfacePractice
             IsHasSidecar = isHasSidecar;
         }
 
-        public override object Clone()
-        {
-            return MemberwiseClone();
-        }
 
         public override string ToString()
         {

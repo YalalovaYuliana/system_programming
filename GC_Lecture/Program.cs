@@ -22,6 +22,24 @@ namespace GC_Lecture
             GC.Collect();
             Console.WriteLine($"Busy memory (byte): {GC.GetTotalMemory(false)}");
             Console.WriteLine($"Object generation: {GC.GetGeneration(hlp)}");
+
+            Console.WriteLine("\n\n\n\n\n____________________________");
+
+            //DisposeExample test = new DisposeExample();
+
+            //try
+            //{
+            //    test.DoSomething();
+            //}
+            //finally
+            //{
+            //    test.Dispose();
+            //}
+
+            using (DisposeExample test = new DisposeExample())
+            {
+                test.Dispose();
+            }
         }
     }
 
@@ -40,5 +58,33 @@ namespace GC_Lecture
             string age;
         }
         
+    }
+
+    class DisposeExample : IDisposable
+    {
+        private bool isDisposed = false;
+        private void Cleaning(bool disposing)
+        {
+            if (!isDisposed)
+            {
+                if (disposing)
+                {
+                    Console.WriteLine("Free ruler resource");
+                }
+                Console.WriteLine("Free unruler resource");
+            }
+            isDisposed = true;
+        }
+        public void Dispose()
+        {
+            Console.WriteLine("Example Dispose");
+            Cleaning(true);
+            GC.SuppressFinalize(this);
+        }
+        ~DisposeExample()
+        {
+            Cleaning(false);
+        }
+        public void DoSomething() { Console.WriteLine("Do something"); }
     }
 }

@@ -35,6 +35,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InterfacePractice", "..\Int
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GC_Lecture", "..\GC_Lecture\GC_Lecture.csproj", "{1093668D-04E5-4E13-AD8E-5536E6A10D97}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GC_Practice", "..\GC_Practice\GC_Practice.csproj", "{183090BC-5B5B-408A-BE7E-BEDFAFBB0EB6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -105,6 +107,10 @@ Global
 		{1093668D-04E5-4E13-AD8E-5536E6A10D97}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1093668D-04E5-4E13-AD8E-5536E6A10D97}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1093668D-04E5-4E13-AD8E-5536E6A10D97}.Release|Any CPU.Build.0 = Release|Any CPU
+		{183090BC-5B5B-408A-BE7E-BEDFAFBB0EB6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{183090BC-5B5B-408A-BE7E-BEDFAFBB0EB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{183090BC-5B5B-408A-BE7E-BEDFAFBB0EB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{183090BC-5B5B-408A-BE7E-BEDFAFBB0EB6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
